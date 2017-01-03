@@ -2,8 +2,6 @@
 //===========================
 
 //CALL THE PACKAGES ------------
-
-
 var User = require('../../app/models/user');
 var jwt = require('jsonwebtoken');
 //referencing our config.js
