@@ -14,9 +14,8 @@ angular.module('MainController', [])
 
 		// get user information on route change
 		Auth.getUser()
-			.then(function(data){
-
-				self.user = data;
+			.then(function(response){
+				self.user = response.data;
 			});
 	});
 

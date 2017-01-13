@@ -1,6 +1,6 @@
 main {
 
-	padding-top: 30px;
+	padding-top: 10px;
 }
 
 /* HEADER 
@@ -39,4 +39,14 @@ header .navbar {
 	from { -moz-transform:rotate(0deg); }
 	to { -moz-transform:rotate(360deg); }
 
+}
+
+/* NGANIMATE
+====================== */
+
+/* show and hide */
+.show-hide-message .ng-hide-remove {
+	-webkit-animation:zoomIn 0.3s both ease; 
+	-moz-animation:zoomIn 0.3s both ease; 
+	animation:zoomIn 0.3s both ease;
 }

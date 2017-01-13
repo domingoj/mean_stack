@@ -23,14 +23,10 @@ module.exports = function(app, express) {
 			username: req.body.username
 		}).select('name username password').exec(function(err, user){
 
-
-
 			if(err) throw err;
 
 			//if no user with that username was found
 			if(!user){
-
-
 				res.json({
 					success: false,
 					message: 'Authentication failed. User not found.'

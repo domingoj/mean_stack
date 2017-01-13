@@ -22,6 +22,8 @@ angular.module('userService',[])
 
 	// update a user
 	userFactory.update = function(id, userData) { 
+		console.log(id);
+		console.log(userData);
 		return $http.put('/api/users/' + id, userData);
 	};
 
