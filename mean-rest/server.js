@@ -45,7 +45,7 @@ var apiRoutes = require('./app/routes/api')(app,express);
 // all of our routes will be prefixed with /api
 app.use('/api', apiRoutes);
 
-// MAIN CATCHALL ROUTE ---------------
+// MAIN CATCH ALL ROUTE ---------------
 // SEND USERS TO FRONTEND ------------
 /// has to be registered after API ROUTES
 // will be handled by our angular app

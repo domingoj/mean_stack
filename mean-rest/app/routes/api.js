@@ -179,7 +179,7 @@ module.exports = function(app, express) {
 
 				if(err) res.send(err);
 
-				//update each user;s info only if its new
+				//update each user's info only if its new
 				if(req.body.name) user.name = req.body.name;
 				if(req.body.username) user.username = req.body.username;
 				if(req.body.password) user.password = req.body.password;

@@ -11,7 +11,7 @@ angular.module('userService',[])
 	}
 
 	//get all users
-	userFactory.all = function{
+	userFactory.all = function(){
 		return $http.get('/api/users');
 	}
 
@@ -33,4 +33,4 @@ angular.module('userService',[])
   	// return our entire userFactory object
 	return userFactory;
 
-} )
+});
