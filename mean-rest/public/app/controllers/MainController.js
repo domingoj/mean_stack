@@ -23,13 +23,23 @@ angular.module('MainController', [])
 	// function to handle login form
 	self.doLogin = function(){
 
+		self.processing = true;
+		 self.error = '';
+
 		 // call the Auth.login() function
-		 Auth.login(self.loginData.userName, self.loginData.password)
+		 Auth.login(self.loginData.username, self.loginData.password)
 
 		  	.then(function(data){
 
+		  		self.processing = false;
 		  		// if a user successfully logs in, redirect to users page
-		  		$location.path('/users');
+		  		if(data.success){
+		  			$location.path('/users');
+		  		}
+
+		  		else {
+		  			self.error = data.message;
+		  		}
 		  	});
 	};
 

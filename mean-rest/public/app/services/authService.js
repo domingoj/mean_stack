@@ -22,6 +22,7 @@ angular.module('authService',[])
 			})
 			.then(function(data){
 				AuthToken.setToken(data.token);
+				return data.data;
 		});
 	};
 
@@ -48,7 +49,7 @@ angular.module('authService',[])
 	authFactory.getUser = function(){
 
 		if(AuthToken.getToken()){
-			return $http.post('/api/me');
+			return $http.post('/api/me', {cache: true});
 		} 
 		else {
 			return $q.reject({ message: 'User has no token.' });
