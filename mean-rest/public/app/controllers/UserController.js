@@ -46,10 +46,12 @@ angular.module('UserController', ['userService'])
 })
 
 // controller applied to user creation page
-.controller('userCreateController', function(User){
+.controller('userCreateController', function(User, Auth){
 
 
 	var self = this;
+
+self.isLoggedIn  = Auth.isLoggedin();
 
 	// variable to hide/show elements of the view 
 	// differentiates between create or edit pages 
@@ -72,6 +74,11 @@ angular.module('UserController', ['userService'])
         		// clear the form
         		self.userData = {};
         		self.message = response.data.message;
+
+        		// if a user successfully logs in, redirect to users page
+		  		if(response.data.success){
+		  			self.loginLink = true;
+		  		}
       });
 };
 })
@@ -109,6 +116,7 @@ angular.module('UserController', ['userService'])
         
         		// bind the message from our API to self.message
         		self.message = response.data.message;
+
       	});
 	};
 

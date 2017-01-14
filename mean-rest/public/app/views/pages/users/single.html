@@ -4,7 +4,7 @@
 </div>
 
 <form class="form-horizontal" ng-submit="user.saveUser()">
-	<div class="form-grou">
+	<div class="form-group">
 		<label class="col-sm-2 control-label">Name</label> 
 		<div class="col-sm-6">
 			<input type="text" class="form-control" ng-model="user.userData.name">
@@ -39,5 +39,11 @@
 	<div class="col-sm-6 col-sm-offset-2">
 		<div class="alert alert-info"> {{ user.message }}
 		</div>
+	</div>
+</div>
+
+<div class="row show-hide-message" ng-show="user.loginLink && !user.isLoggedIn">
+	<div class="col-sm-6 col-sm-offset-2">
+		<a ng-href="/login" class="btn btn-danger">Click here to login</a>
 	</div>
 </div>
