@@ -1,0 +1,23 @@
+{
+  "name": "mean_workflow",
+  "description": "",
+  "main": "server.js",
+  "authors": [
+    "jermiedomingo <8jermiedomingo@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/domingoj/mean_stack",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "angular": "^1.6.1",
+    "angular-route": "^1.6.1",
+    "angular-animate": "^1.6.1"
+  }
+}

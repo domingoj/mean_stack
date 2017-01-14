@@ -1,0 +1,1 @@
+angular.module("myApp",["app.routes","MainController"]),angular.module("app.routes",["ngRoute"]).config(function(l,e){l.when("/",{templateUrl:"app/views/pages/home.html",controller:"mainController",controllerAs:"main"}),e.html5Mode(!0)}),angular.module("MainController",[]).controller("mainController",function(){var l=this;l.message="Hello sample message"});
