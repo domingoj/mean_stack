@@ -4,7 +4,6 @@ The term MEAN stack refers to a collection of JavaScript based technologies used
 
 A simple USER CRM app developed is accessible through:
 
-https://user-crm--2016.herokuapp.com/
-
+<a target="_blank" href="https://user-crm--2016.herokuapp.com/">User CRM application acquired by Google for $$$</a>
 
 *Based on the book Mean Machine by Scotch.io
