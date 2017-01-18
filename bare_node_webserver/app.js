@@ -12,46 +12,52 @@ let mimes = {
 	'.png': 'image/png'
 }
 
+function fileAccess(filepath) {
+	return new Promise((resolve, reject) => {
+		fs.access(filepath, fs.F_OK, error => {
+			if(!error){
+				resolve(filepath);
+			} else {
+				reject(error);
+			}
+		})
+	});
+}
+
+function fileReader(filepath) {
+	return new Promise((resolve, reject) => {
+		fs.readFile(filepath, (error, content) =>{
+			if(!error){
+				resolve(content);
+			} else {
+				reject(error);
+			}
+		});
+	})
+}
+
 function webserver(req, res) {
 	// if the route requested is '/', then load 'index.htm' or else
 	// load the requested file(s)
 
 	let baseURI = url.parse(req.url);
 	let filepath = __dirname + '/public' + (baseURI.pathname === '/' ? '/index.htm' : baseURI.pathname);
-
-	console.log(filepath);
-	// Check if the requested file is accessible or not
-	fs.access(filepath, fs.F_OK, error => {
-
-		if(!error) {
-			// Read and server the file
-			fs.readFile(filepath, (error, content) => {
-				if(!error) {
-					// Resolve the content type
-					let contentType = mimes[path.extname(filepath)]; // mimes['.css'] === 'text/css'
-					// Serve the file from the buffer
-					res.writeHead(200, {'content-type': contentType});
-					res.end(content, 'utf-8');
-
-				} else {
-					//File is acccessible but cant read
-					// Serve a 500
-					res.writeHead(500);
-					res.end('The server could not read the file requested');
-				}
-
-			});
-		} else {
-			//File is not available
-			// Serve a 404
+	let contentType = mimes[path.extname(filepath)]; // mimes['.css'] === 'text/css'
+	
+	fileAccess(filepath)
+		//invoked when fileAccesspromise is resolved
+		.then(fileReader)
+		//invoked when fileReader promise is resolved
+		.then(content => {
+			res.writeHead(200, {'Content-type': contentType});
+			res.end(content, 'utf-8');
+		})
+		.catch(error => {
 			res.writeHead(404);
-			res.end('Content not found');
-		}
-	});
+			res.end(JSON.stringify(error));
+		});
+	
 
 }
 
-http.createServer(webserver).listen(3000, () => {
-
-	console.log('Webserver running on port 3000!');
-})
+http.createServer(webserver).listen(3000, () => console.log('Webserver running on port 3000!'));
