@@ -24,16 +24,18 @@ function fileAccess(filepath) {
 	});
 }
 
-function fileReader(filepath) {
+function streamFile(filepath) {
 	return new Promise((resolve, reject) => {
-		fs.readFile(filepath, (error, content) =>{
-			if(!error){
-				resolve(content);
-			} else {
-				reject(error);
-			}
+		let fileStream = fs.createReadStream(filepath);
+
+		fileStream.on('open', () => {
+			resolve(fileStream);
 		});
-	})
+
+		fileStream.on('error', error => {
+			reject(error);
+		});
+	});
 }
 
 function webserver(req, res) {
@@ -46,11 +48,13 @@ function webserver(req, res) {
 	
 	fileAccess(filepath)
 		//invoked when fileAccesspromise is resolved
-		.then(fileReader)
+		.then(streamFile)
 		//invoked when fileReader promise is resolved
-		.then(content => {
+		.then(fileStream => {
 			res.writeHead(200, {'Content-type': contentType});
-			res.end(content, 'utf-8');
+			//not required since stream is a continuous flow of data
+			//res.end(content, 'utf-8');
+			fileStream.pipe(res);
 		})
 		.catch(error => {
 			res.writeHead(404);
