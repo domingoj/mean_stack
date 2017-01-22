@@ -4,27 +4,24 @@ const app = express();
 
 app.set('port', process.env.PORT || 3000);
 
-let helloMiddleware = (req, res, next) => {
-	req.hello = "Hello! Its me...";
-	next();
-}
+//required only if you want to set the views folder path to another name
+//views is default
+//app.set('views', './views');
 
-//plugs the middleware function in
-app.use(helloMiddleware);
+//to serve the static files (css, etc.)
+app.use(express.static('public'));
 
-
-//if made like this, middleware will only work on routes origination from /dashboard
-// and forward e.g. (/dashboard/password, etc.) 
-//app.use('/dashboard', helloMiddleware);
+app.set('view engine', 'ejs');
 
 app.get('/', (req, res, next) => {
-	res.send('<h1>Hello Express!</h1>');
-	console.log(req.hello);
+	
+	res.render('login', {
+		pageTitle: 'My Login Page'
+	});
 });
 
 app.get('/dashboard', (req, res, next) => {
 	res.send('<h1>This is the dashboard page! Middelware says ' + req.hello + '</h1>');
-
 });
 
 app.listen(app.get('port'), () => console.log('ChatCAT running on port: ', 3000));
