@@ -8,6 +8,20 @@ router.get('/', (req, res, next) => {
 	});
 });
 
+
+router.get('/rooms', (req, res, next) => {
+
+	res.render('rooms');
+
+});
+
+router.get('/chat', (req, res, next) => {
+
+	res.render('chatroom');
+
+});
+
+
 module.exports = {
 	router: router
 }
