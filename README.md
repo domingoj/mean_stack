@@ -1,4 +1,4 @@
-For learning purposes of the mean stack.
+This repository is a collection of tiny projects & resources for learning purposes of the mean stack.
 
 The term MEAN stack refers to a collection of JavaScript based technologies used to develop web applications. MEAN is an acronym for MongoDB, ExpressJS, AngularJS and Node.js. From client to server to database, MEAN is full stack JavaScript. 
 
@@ -18,7 +18,7 @@ Apps created:
 			</ul>
 		</p>
 	</li>
-	<li>Chat cat
+	<li>Chat cat (In progress)
 		<p> What I've learned in building this project so far:
 			<ul>
 				<li>Proper node modules structure</li>
