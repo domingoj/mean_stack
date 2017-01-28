@@ -1,6 +1,6 @@
 {
 	"host": "http://localhost:3000",
-	"dbURI": "localhost:27017/chatcatdb_domingoj",
+	"dbURI": "mongodb://chatcat123:chatcat123@ds023694.mlab.com:23694/chatcatdb_domingoj",
 	"sessionSecret": "supersecret",
 	"fb": {
 		
@@ -10,6 +10,13 @@
 		
 		"callbackURL": "//localhost:3000/auth/facebook/callback",
 	
+		"profileFields": ["id", "displayName", "photos"]
+	},
+
+	"twitter": {
+		"consumerKey": "",
+		"consumerSecret": "",
+		"callbackURL": "//localhost:3000/auth/twitter/callback",
 		"profileFields": ["id", "displayName", "photos"]
 	}
 }

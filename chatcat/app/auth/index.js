@@ -5,7 +5,7 @@
  
  //import the constructor function of passport facebook strategy
  const FacebookStrategy = require('passport-facebook').Strategy;
-
+ const TwitterStrategy = require('passport-twitter').Strategy;
 //FInd a single user based on a key
 let findOne = profileID => {
 	console.log("findOne");
@@ -68,6 +68,9 @@ let findById = id => {
 
  	});
 
+ 	//for twitter (OAuth 1.0):
+ 	//accessToken -> token
+ 	//refreshToken -> tokenSecret
  	let authProcessor = (accessToken, refreshToken, profile, done) => {
  		//Find a user profile in the local db using profile.id as sent by 3rt party provider
  		console.log("authprocessor");
@@ -87,6 +90,8 @@ let findById = id => {
  	//config and callback
  	console.log("strategy");
  	passport.use(new FacebookStrategy(config.fb, authProcessor));
+ 	passport.use(new TwitterStrategy(config.twitter, authProcessor));
+
  }
 
 

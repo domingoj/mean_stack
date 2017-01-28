@@ -48,6 +48,16 @@ router.get('/auth/facebook/callback', passport.authenticate('facebook', {
 
 );
 
+//Routing for auth 
+router.get('/auth/twitter', passport.authenticate('twitter'));
+
+router.get('/auth/twitter/callback', passport.authenticate('twitter', {
+		successRedirect: '/rooms',
+		failureRedirect: '/login'
+	})
+
+);
+
 module.exports = {
 	router: router,
 	session: require('./session')
