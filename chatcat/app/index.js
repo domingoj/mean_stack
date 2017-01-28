@@ -14,7 +14,9 @@ router.get('/', (req, res, next) => {
 
 router.get('/rooms', (req, res, next) => {
 
-	res.render('rooms');
+	res.render('rooms', {
+		user: req.user
+	});
 
 });
 
@@ -35,7 +37,6 @@ router.get('/setsession', (req, res, next) => {
 
 	res.send("Session set");
 });
-
 
 //Routing for auth 
 router.get('/auth/facebook', passport.authenticate('facebook'));
