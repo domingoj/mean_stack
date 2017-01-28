@@ -1,6 +1,7 @@
 'use strict';
 const express = require('express');
 const app = express();
+const passport = require('passport');
 
 //will look for index.js file by default from that folder
 const chatCat = require('./app');
@@ -16,6 +17,12 @@ app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
 app.use(chatCat.session);
+
+//hooks up passport to req, response streams of express
+app.use(passport.initialize());
+
+//hooks up express sessuion middleware with passport 
+app.use(passport.session());
 
 app.use('/', chatCat.router);
 

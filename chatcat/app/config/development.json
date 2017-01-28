@@ -1,16 +1,15 @@
 {
 	"host": "http://localhost:3000",
-	"dbURI": "mongodb://chatcatuser:chatcatuser@ds023694.mlab.com:23694/chatcatdb_domingoj",
+	"dbURI": "localhost:27017/chatcatdb_domingoj",
 	"sessionSecret": "supersecret",
 	"fb": {
-		//facebook app id
+		
 		"clientID": "",
-		//facebook app secret
-		"cientSecret": "",
-		//route to be called by facebook once user authorizes our app
+	
+		"clientSecret": "",
+		
 		"callbackURL": "//localhost:3000/auth/facebook/callback",
-		//passport will request fb these keys
-		//photos array's first field is user's profile pic
+	
 		"profileFields": ["id", "displayName", "photos"]
 	}
 }

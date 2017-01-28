@@ -1,5 +1,8 @@
 'use strict';
 const router = require('express').Router();
+const passport = require('passport');
+
+require('./auth')();
 
 router.get('/', (req, res, next) => {
 	
@@ -32,6 +35,17 @@ router.get('/setsession', (req, res, next) => {
 
 	res.send("Session set");
 });
+
+
+//Routing for auth 
+router.get('/auth/facebook', passport.authenticate('facebook'));
+
+router.get('/auth/facebook/callback', passport.authenticate('facebook', {
+		successRedirect: '/rooms',
+		failureRedirect: '/login'
+	})
+
+);
 
 module.exports = {
 	router: router,

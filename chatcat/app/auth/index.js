@@ -6,10 +6,9 @@
  //import the constructor function of passport facebook strategy
  const FacebookStrategy = require('passport-facebook').Strategy;
 
-
-
 //FInd a single user based on a key
 let findOne = profileID => {
+	console.log("findOne");
 	return db.userModel.findOne({
 		'profileId': profileID
 	});
@@ -34,11 +33,45 @@ let createNewUser = profile => {
 	});
 }
 
- module.exports = () => 
+let findById = id => {
+	console.log("findbyid");
+	return new Promise((resolve, reject) => {
+
+		db.userModel.findById(id, (error, user) => {
+
+			if(error){
+				reject(error);
+			} else {
+				resolve(user);
+			}
+		});
+	});
+}
+
+ module.exports = () => {
+
+ 	//will be invoked once done() with authentication
+ 	passport.serializeUser((user, done) => {
+ 		console.log("serialize");
+ 		//create a session and store user.id on that session
+ 		done(null, user.id);
+ 	});
+
+ 	//whenever a request for the user data is received,
+ 	//passport fetches the user.id from the session and invokes this method
+ 	passport.deserializeUser((id, done) => {
+ 		console.log("deserialize");
+ 		//Find the user using the _id
+ 		findById(id)
+ 			.then(user => done(null, user))
+ 			.catch(error => console.log("error deserializing the user"));
+
+
+ 	});
 
  	let authProcessor = (accessToken, refreshToken, profile, done) => {
  		//Find a user profile in the local db using profile.id as sent by 3rt party provider
- 		
+ 		console.log("authprocessor");
  		findOne(profile.id)
  			//if the user is found, return the user data using the done() function
  			.then(result => {
@@ -53,5 +86,8 @@ let createNewUser = profile => {
  			})
  	}
  	//config and callback
- 	passport.use(new FacebookStrategy(config.fb), authProcessor);
+ 	console.log("strategy");
+ 	passport.use(new FacebookStrategy(config.fb, authProcessor));
  }
+
+
