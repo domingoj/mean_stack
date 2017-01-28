@@ -53,7 +53,7 @@ let findById = id => {
  	//will be invoked once done() with authentication
  	passport.serializeUser((user, done) => {
  		console.log("serialize");
- 		//create a session and store user.id on that session
+ 		//create a session and store user.id (mongodb unique id) on that session
  		done(null, user.id);
  	});
 
@@ -65,7 +65,6 @@ let findById = id => {
  		findById(id)
  			.then(user => done(null, user))
  			.catch(error => console.log("error deserializing the user"));
-
 
  	});
 
@@ -80,7 +79,7 @@ let findById = id => {
  				} else {
  					//if not found, create one in the local db and return
  					createNewUser(profile)
- 						.then(newCHatUser => done(null, newCHatUser))
+ 						.then(newChatUser => done(null, newChatUser))
  						.catch(error => console.log('Error when creating a user'));
  				}
  			})
