@@ -12,20 +12,6 @@ router.get('/', (req, res, next) => {
 });
 
 
-router.get('/rooms', (req, res, next) => {
-
-	res.render('rooms', {
-		user: req.user
-	});
-
-});
-
-router.get('/chat', (req, res, next) => {
-
-	res.render('chatroom');
-
-});
-
 router.get('/getsession', (req, res, next) => {
 
 	res.send("My favorite color: "  + req.session.favColor);
@@ -57,6 +43,47 @@ router.get('/auth/twitter/callback', passport.authenticate('twitter', {
 	})
 
 );
+
+
+// A middle ware that checks to see if the user is authenticated & logged in
+let isAuthenticated = (req, res, next) => {
+
+	//method provided by passport
+	if(req.isAuthenticated()) {
+		next();
+	} else {
+		res.redirect('/');
+	}
+
+}
+
+
+router.get('/logout', (req, res, next) => {
+	
+	//method available thru passport to clear out a session
+	req.logout();
+	res.redirect('/');
+
+});
+
+
+router.use(isAuthenticated);
+
+router.get('/rooms', (req, res, next) => {
+
+	res.render('rooms', {
+		user: req.user
+	});
+
+});
+
+router.get('/chat', (req, res, next) => {
+
+	res.render('chatroom', {
+		user: req.user
+	});
+
+});
 
 module.exports = {
 	router: router,
