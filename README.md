@@ -7,7 +7,7 @@ Apps created:
 <ul>
 	<li>
 	<a target="_blank" href="https://user-crm--2016.herokuapp.com/"> A simple USER CRM</a> based on the book Mean Machine by Scotch.io
-		<p> What I've learned in building this project so far:
+		<div> What I've learned in building this project so far:
 			<ul>
 				<li>setting restful API endpoints</li>
 				<li>Client (Angular app) - Server (node/express app) Communication</li>
@@ -16,10 +16,10 @@ Apps created:
 				<li>Heroku Deployment</li>
 				<li>Touched a little on Gulp & Bower</li>
 			</ul>
-		</p>
+		</div>
 	</li>
 	<li>Chat cat (In progress) - A Realtime Chat application
-		<p> What I've learned in building this project so far:
+		<div> What I've learned in building this project so far:
 			<ul>
 				<li>Proper node modules structure</li>
 				<li>EJS</li>
@@ -27,21 +27,23 @@ Apps created:
 				<li>Session management</li>
 				<li>Passport.js authentication - Facebook & Twitter Strategy</li>
 			</ul>
-		</p>
+		</div>
 	</li>
 	<li>Encrypt/Decrypt module - a simple module that takes a string and encrypts/decrypts it
-		<p> What I've learned in building this project so far:
+		<div> What I've learned in building this project so far:
 			<ul>
 				<li>using the npm crypto module</li>
 				<li>node modules in general</li>
 			</ul>
-		</p>
+		</div>
 	</li>
 	<li> QR generator - a simple module that takes a string and converts it to a QR code and vice versa
-		<p> What I've learned in building this project so far:
-			<li>using the npm qr-image module</li>
-			<li> fs </li>
-		</p>
+		<div> What I've learned in building this project so far:
+			<ul>
+				<li>using the npm qr-image module</li>
+				<li> fs </li>
+			</ul>
+		</div>
 	</li>
 </ul>
  
