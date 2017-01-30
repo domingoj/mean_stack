@@ -1,16 +1,27 @@
 'use strict';
 const router = require('express').Router();
 const passport = require('passport');
-
+const config = require('./config');
 // Social Authentication logic
 require('./auth')();
 
 //Create an IO Server instance
 let ioServer = app => {
 
+	//stored in memory, not in db
+	app.locals.chatroom = [];
+
 	const server = require('http').Server(app);
 	const io = require('socket.io')(server);
-	require('./socket')(io);
+
+	//socket.io middleware
+	io.use((socket, next) => {
+
+		//for socket.io to read directly from the session
+		require('./session')(socket.request, {}, next);
+	});
+
+	require('./socket')(io, app);
 	return server;
 }
 
@@ -83,7 +94,8 @@ router.use(isAuthenticated);
 router.get('/rooms', (req, res, next) => {
 
 	res.render('rooms', {
-		user: req.user
+		user: req.user,
+		host: config.host
 	});
 
 });
@@ -91,7 +103,8 @@ router.get('/rooms', (req, res, next) => {
 router.get('/chat', (req, res, next) => {
 
 	res.render('chatroom', {
-		user: req.user
+		user: req.user,
+		host: config.host
 	});
 
 });

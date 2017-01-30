@@ -1,7 +1,12 @@
 'use strict';
 
-module.exports = (io) => {
+module.exports = (io, app) => {
 
-//TO DO
+	let allrooms = app.locals.chatrooms;
+
+	io.of('/roomslist').on('connection', socket => {
+		console.log('socket.io connected to the client');
+
+	});
 
 }
