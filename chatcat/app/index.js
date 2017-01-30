@@ -2,7 +2,18 @@
 const router = require('express').Router();
 const passport = require('passport');
 
+// Social Authentication logic
 require('./auth')();
+
+//Create an IO Server instance
+let ioServer = app => {
+
+	const server = require('http').Server(app);
+	const io = require('socket.io')(server);
+	require('./socket')(io);
+	return server;
+}
+
 
 router.get('/', (req, res, next) => {
 	
@@ -86,6 +97,7 @@ router.get('/chat', (req, res, next) => {
 });
 
 module.exports = {
-	router: router,
-	session: require('./session')
+	router,
+	session: require('./session'),
+	ioServer
 }
