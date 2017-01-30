@@ -9,7 +9,7 @@ require('./auth')();
 let ioServer = app => {
 
 	//stored in memory, not in db
-	app.locals.chatroom = [];
+	app.locals.chatrooms = [];
 
 	const server = require('http').Server(app);
 	const io = require('socket.io')(server);
