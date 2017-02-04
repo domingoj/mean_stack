@@ -25,6 +25,18 @@ let ioServer = app => {
 	return server;
 }
 
+//Find a chatroom with a given ID
+let findRoomById = (allrooms, roomID) => {
+	return allrooms.find((element, index, array) => {
+
+		if(element.roomID === roomID){
+			return true;
+		} else {
+			return false;
+		}
+	})
+}
+
 
 router.get('/', (req, res, next) => {
 	
@@ -100,12 +112,24 @@ router.get('/rooms', (req, res, next) => {
 
 });
 
-router.get('/chat', (req, res, next) => {
+router.get('/chat/:id', (req, res, next) => {
 
-	res.render('chatroom', {
-		user: req.user,
-		host: config.host
-	});
+	//Find a chatroom using the id
+	//render if found
+	let getRoom = findRoomById(req.app.locals.chatrooms, req.params.id);
+	if(getRoom === undefined){
+		return next();
+	} else {
+
+		res.render('chatroom', {
+			user: req.user,
+			host: config.host,
+			room: getRoom.room,
+			roomID: getRoom.roomID
+
+		});
+
+	}
 
 });
 

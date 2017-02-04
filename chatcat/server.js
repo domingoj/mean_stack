@@ -14,6 +14,7 @@ app.set('port', process.env.PORT || 3000);
 
 //to serve the static files (css, etc.)
 app.use(express.static('public'));
+app.use('/chat', express.static('public'));
 app.set('view engine', 'ejs');
 
 app.use(chatCat.session);
