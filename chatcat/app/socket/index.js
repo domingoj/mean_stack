@@ -153,6 +153,11 @@ module.exports = (io, app) => {
 			socket.broadcast.to(room.roomID).emit('updateUsersList', JSON.stringify(room.users));
 		})
 
+		//when a new message arrives
+		socket.on('newMessage', data => {
+			socket.broadcast.to(data.roomID).emit('inMessage', JSON.stringify(data));
+		})
+
 	});
 
 }
