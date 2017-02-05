@@ -74,6 +74,28 @@ module.exports = (io, app) => {
 		}
 	}
 
+	let removeUserFromRoom = (allrooms, socket) => {
+		
+		for(let room of allrooms){
+			//find the user
+			let findUser = room.users.findIndex((element, index, array) => {
+				if(element.socketID === socket.id){
+					return true;
+				} else {
+					return false;
+				}
+
+				//return element.socketID === socket.id ? true: false;
+			});
+
+			if(findUser > -1) {
+				socket.leave(room.roomID);
+				room.users.splice(findUser, 1);
+				return room;
+			}
+		}
+	}
+
 	//unique roomID generator
 	let randomHex = () => {
 		return crypto.randomBytes(24).toString('hex');
@@ -122,6 +144,14 @@ module.exports = (io, app) => {
 			socket.broadcast.to(data.roomID).emit('updateUsersList', JSON.stringify(usersList.users));
 			socket.emit('updateUsersList', JSON.stringify(usersList.users));
 		});
+
+		//when a socket exists
+		socket.on('disconnect', () => {
+
+			//find the room, and purge the user
+			let room = removeUserFromRoom(allrooms, socket);
+			socket.broadcast.to(room.roomID).emit('updateUsersList', JSON.stringify(room.users));
+		})
 
 	});
 
