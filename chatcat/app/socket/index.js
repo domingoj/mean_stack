@@ -19,6 +19,62 @@ module.exports = (io, app) => {
 				return findRoom > -1 ? true : false;
 			}
 
+	//Find a chatroom with a given ID
+	//DUPLICATED BECAUSE I DIDN'T CREATE THE HELPER MODULE
+	//SIMPLE STUFF, TOO LAZY TO DO
+	let findRoomById = (allrooms, roomID) => {
+	return allrooms.find((element, index, array) => {
+
+			if(element.roomID === roomID){
+				return true;
+			} else {
+				return false;
+			}
+		})
+	}
+
+
+	let addUserToRoom = (allrooms, data, socket) => {
+
+		//get the room object
+		let getRoom = findRoomById(allrooms, data.roomID);
+	
+		if(getRoom !== undefined){
+			//get the active user's ID
+			let userID = socket.request.session.passport.user;
+
+			//Check to see if this user already exists
+			let checkUser = getRoom.users.findIndex((element, index, array) => {
+
+				if(element.userID === userID){
+					return true;
+				} else {
+					return false;
+				}
+			});
+
+			//if the user is already present in the room, remove his first
+			if (checkUser > -1) {
+				getRoom.users.splice(checkUser, 1);
+			}
+
+			//push the user into the room's user array
+			getRoom.users.push({
+				socketID: socket.id,
+				userID,
+				user: data.user,
+				userPic: data.userPic
+			});
+
+			// join the room channel
+			socket.join(data.roomID);
+
+			//return the updated room object
+			return getRoom;
+
+		}
+	}
+
 	//unique roomID generator
 	let randomHex = () => {
 		return crypto.randomBytes(24).toString('hex');
@@ -54,6 +110,21 @@ module.exports = (io, app) => {
 			}
 
 		});
+	});
+
+	io.of('/chatter').on('connection', socket => {
+
+
+		//Join a chatroom
+		socket.on('join', data => {
+
+			let usersList = addUserToRoom(allrooms, data, socket);
+
+			// Update the list of active users as shown in the chatroom
+			//TODO
+			console.log('usersList: ', usersList);
+		});
+
 	});
 
 }
