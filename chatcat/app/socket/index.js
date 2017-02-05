@@ -33,7 +33,6 @@ module.exports = (io, app) => {
 		})
 	}
 
-
 	let addUserToRoom = (allrooms, data, socket) => {
 
 		//get the room object
@@ -114,15 +113,14 @@ module.exports = (io, app) => {
 
 	io.of('/chatter').on('connection', socket => {
 
-
 		//Join a chatroom
 		socket.on('join', data => {
 
 			let usersList = addUserToRoom(allrooms, data, socket);
 
 			// Update the list of active users as shown in the chatroom
-			//TODO
-			console.log('usersList: ', usersList);
+			socket.broadcast.to(data.roomID).emit('updateUsersList', JSON.stringify(usersList.users));
+			socket.emit('updateUsersList', JSON.stringify(usersList.users));
 		});
 
 	});
