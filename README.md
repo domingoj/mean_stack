@@ -23,8 +23,9 @@ Apps created:
 				<li>configs for env/prod</li>
 				<li>Sessions management</li>
 				<li>Passport.js authentication - Facebook & Twitter Strategy</li>
-				<li>Socket.io</li>
-				<li>Redis</li>
+				<li>Socket.io - for realtime, bi-directional communication between web clients and servers</li>
+				<li>Redis for in-memory data structure store</li>
+				<li>Winston - for logging</li>
 			</ul>
 	</li>
 	<li>Encrypt/Decrypt module - a simple module that takes a string and encrypts/decrypts it
