@@ -2,6 +2,8 @@
 const router = require('express').Router();
 const passport = require('passport');
 const config = require('./config');
+const redis = require('redis').createClient;
+const adapter = require('socket.io-redis');
 // Social Authentication logic
 require('./auth')();
 
@@ -13,6 +15,27 @@ let ioServer = app => {
 
 	const server = require('http').Server(app);
 	const io = require('socket.io')(server);
+
+	//for session affinity support, use websocket
+	//needs to update on the views too
+	io.set('transports', ['websocket']);
+
+	//intereface for sending and publishing data buffers
+	let pubClient = redis(config.redis.port, config.redis.host, {
+		auth_pass: config.redis.password
+	});
+
+	//interface to subscribe or get data back from redis
+	let subClient = redis(config.redis.port, config.redis.host, {
+		return_buffers: true,
+		auth_pass: config.redis.password
+	});
+
+	//to interface redis with socket.io
+	io.adapter(adapter({
+		pubClient,
+		subClient
+	}));
 
 	//socket.io middleware
 	io.use((socket, next) => {

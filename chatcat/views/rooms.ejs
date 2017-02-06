@@ -10,7 +10,9 @@
 		'use strict';
 		$(() => {
 
-			let socket = io('<%= host %>' + '/roomslist');
+			let socket = io('<%= host %>' + '/roomslist', {
+				transports: ['websocket']
+			});
 			let newRoomInput = $("input[name='roomName']");
 
 			// socket.on('connect', () => console.log("connected to the server"));
