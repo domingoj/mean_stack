@@ -1,6 +1,7 @@
 'use strict';
  const passport = require('passport');
  const config = require('../config');
+ const logger = require('../logger');
  const db = require('../db');
  
  //import the constructor function of passport facebook strategy
@@ -64,7 +65,7 @@ let findById = id => {
  		//Find the user using the _id
  		findById(id)
  			.then(user => done(null, user))
- 			.catch(error => console.log("error deserializing the user"));
+ 			.catch(error => logger.log('error', 'Error when deserializing the user: ' + error));
 
  	});
 
@@ -83,7 +84,7 @@ let findById = id => {
  					//if not found, create one in the local db and return
  					createNewUser(profile)
  						.then(newChatUser => done(null, newChatUser))
- 						.catch(error => console.log('Error when creating a user'));
+ 						.catch(error => logger.log('error','Error when creating a user: ' + error));
  				}
  			})
  	}
