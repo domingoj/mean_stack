@@ -159,5 +159,6 @@ router.get('/chat/:id', (req, res, next) => {
 module.exports = {
 	router,
 	session: require('./session'),
-	ioServer
+	ioServer,
+	logger: require('./logger')
 }

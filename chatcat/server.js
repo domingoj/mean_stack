@@ -6,6 +6,15 @@ const passport = require('passport');
 //will look for index.js file by default from that folder
 const chatCat = require('./app');
 
+const morgan = require('morgan')('combined', {
+	stream: {
+		write: message => {
+			//Write to logs
+			chatCat.logger.log('info', message);
+		}
+	}
+});
+
 app.set('port', process.env.PORT || 3000);
 
 //required only if you want to set the views folder path to another name
@@ -24,6 +33,8 @@ app.use(passport.initialize());
 
 //hooks up express sessuion middleware with passport 
 app.use(passport.session());
+
+app.use(morgan);
 
 app.use('/', chatCat.router);
 
