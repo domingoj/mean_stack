@@ -21,8 +21,10 @@ Apps created:
 				<li>Proper node modules structure</li>
 				<li>EJS</li>
 				<li>configs for env/prod</li>
-				<li>Session management</li>
+				<li>Sessions management</li>
 				<li>Passport.js authentication - Facebook & Twitter Strategy</li>
+				<li>Socket.io</li>
+				<li>Redis</li>
 			</ul>
 	</li>
 	<li>Encrypt/Decrypt module - a simple module that takes a string and encrypts/decrypts it
