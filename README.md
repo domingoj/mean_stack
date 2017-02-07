@@ -17,7 +17,7 @@ Apps created:
 			</ul>
 	</li>
 	<li>
-	<a target="_blank" href="https://chatcat-app-2017.herokuapp.com">Chat cat</a> - A Realtime Chat application deployed to heroku
+	<a target="_blank" href="https://chatcat-app-2017.herokuapp.com">chatCAT</a> - A Realtime Chat application deployed to Heroku
 			<ul> 
 				<li>Proper node modules structure</li>
 				<li>EJS</li>
@@ -27,6 +27,7 @@ Apps created:
 				<li>Socket.io - for realtime, bi-directional communication between web clients and servers</li>
 				<li>Redis for in-memory data structure store</li>
 				<li>Winston & Morgan - for logging</li>
+				<li>Production configuration setup with Heroku</li>
 			</ul>
 	</li>
 	<li>Encrypt/Decrypt module - a simple module that takes a string and encrypts/decrypts it

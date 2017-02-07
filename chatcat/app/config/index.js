@@ -5,6 +5,7 @@ if(process.env.NODE_ENV === 'production'){
 	// process.env.REDIS_URL is where REDIS details are
 	let redisURI = require('url').parse(process.env.REDIS_URL);
 	let redisPassword = redisURI.auth.split(":")[1];
+	
 	module.exports = {
 		host: process.env.host || "",
 		dbURI: process.env.dbURI,

@@ -5,7 +5,6 @@ const passport = require('passport');
 
 //will look for index.js file by default from that folder
 const chatCat = require('./app');
-
 const morgan = require('morgan')('combined', {
 	stream: {
 		write: message => {
