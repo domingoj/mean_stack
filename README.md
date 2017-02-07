@@ -6,7 +6,7 @@ Apps created:
 
 <ul>
 	<li>
-	<a target="_blank" href="https://user-crm--2016.herokuapp.com/"> A simple USER CRM</a> based on the book Mean Machine by Scotch.io
+	<a target="_blank" href="https://user-crm--2016.herokuapp.com/"> A simple CRUD User CRM</a> deployed to heroku based on the book Mean Machine by Scotch.io
 			<ul>
 				<li>setting restful API endpoints</li>
 				<li>Client (Angular app) - Server (node/express app) Communication</li>
@@ -16,8 +16,9 @@ Apps created:
 				<li>Touched a little on Gulp & Bower</li>
 			</ul>
 	</li>
-	<li>Chat cat (In progress) - A Realtime Chat application
-			<ul>
+	<li>
+	<a target="_blank" href="https://chatcat-app-2017.herokuapp.com">Chat cat</a> - A Realtime Chat application deployed to heroku
+			<ul> 
 				<li>Proper node modules structure</li>
 				<li>EJS</li>
 				<li>configs for env/prod</li>

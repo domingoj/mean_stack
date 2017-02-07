@@ -52,4 +52,4 @@ app.use((req, res, next) => {
 });
 
 // hook socket io with app instance
-chatCat.ioServer(app).listen(app.get('port'), () => console.log('ChatCAT running on port: ', 3000));
+chatCat.ioServer(app).listen(app.get('port'), () => console.log('ChatCAT running on port: ', app.get('port')));

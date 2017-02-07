@@ -4,7 +4,7 @@ if(process.env.NODE_ENV === 'production'){
 	//offer prod stage env variables
 	// process.env.REDIS_URL is where REDIS details are
 	let redisURI = require('url').parse(process.env.REDIS_URL);
-	let redisPassword = redisURL.auth.split(":")[1];
+	let redisPassword = redisURI.auth.split(":")[1];
 	module.exports = {
 		host: process.env.host || "",
 		dbURI: process.env.dbURI,
@@ -18,7 +18,7 @@ if(process.env.NODE_ENV === 'production'){
 		twitter: {
 			consumerKey: process.env.twConsumerKey,
 			consumerSecret: process.env.twConsumerSecret,
-			callbackURL: process.env.host + "/twitter/facebook/callback",
+			callbackURL: process.env.host + "/auth/twitter/callback",
 			profileFields: ["id", "displayName", "photos"]
 		},
 		redis: {
