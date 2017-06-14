@@ -47,7 +47,6 @@ app.get('/dashboard', (req, res, next) => {
 app.use((req, res, next) => {
 
 	res.status(404).sendFile(process.cwd() + '/views/404.htm');
-
 });
 
 // hook socket io with app instance
