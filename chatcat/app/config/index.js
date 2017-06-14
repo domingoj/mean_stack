@@ -1,6 +1,7 @@
 'use strict';
 
 if(process.env.NODE_ENV === 'production'){
+	
 	//offer prod stage env variables
 	// process.env.REDIS_URL is where REDIS details are
 	let redisURI = require('url').parse(process.env.REDIS_URL);
